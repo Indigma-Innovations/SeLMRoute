@@ -1,0 +1,64 @@
+[project]
+name = "SeLMRoute"
+version = "1.0.0"
+description = "SeLMRoute public reproduction release: Probabilistic Semantic Evidence for Large Language Model Routing"
+readme = "README.md"
+requires-python = ">=3.13,<3.14"
+license = { text = "Apache-2.0" }
+authors = [
+    { name = "Vasilis Perifanis", email="info@indigma.eu" },
+]
+keywords = ["llm", "routing", "semantic-routing", "catboost", "jev", "laya"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "License :: OSI Approved :: Apache Software License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+    "catboost>=1.2.10",
+    "httpx>=0.28.1",
+    "matplotlib>=3.11.2",
+    "numpy>=2.5.3",
+    "pandas>=3.0.6",
+    "pydantic>=2.13.5",
+    "python-dotenv>=1.2.3",
+    "pyyaml>=6.0.3",
+    "rich>=15.0.0",
+    "scikit-learn>=1.9.1",
+    "typer>=0.27.2",
+]
+
+[project.optional-dependencies]
+live-laya = ["laya==0.3.5"]
+notebooks = ["ipykernel==7.3.0"]
+dev = [
+    "pytest==9.1.1",
+    "ruff"
+]
+
+[project.scripts]
+selmroute = "selmroute.cli:app"
+
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/selmroute"]
+
+[tool.pytest.ini_options]
+addopts = "-q"
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 110
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+ignore = ["E501"]
+
+[tool.ruff.lint.flake8-bugbear]
+extend-immutable-calls = ["typer.Option", "typer.Argument"]

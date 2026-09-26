@@ -1,0 +1,11 @@
+.idea
+.venv/
+.env
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+artifacts/
+.ipynb_checkpoints/
+
+data/performance/gte_qwen2.npz

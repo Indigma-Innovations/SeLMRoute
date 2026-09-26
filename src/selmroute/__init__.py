@@ -1,0 +1,3 @@
+"""SeLMRoute public reproduction release."""
+
+__version__ = "1.0.0"

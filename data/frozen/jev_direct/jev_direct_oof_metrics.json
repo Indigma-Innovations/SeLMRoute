@@ -1,0 +1,33 @@
+{
+  "AvgAcc": 68.77934833068167,
+  "Gain@R": 49.04943204946968,
+  "Gain@B": -0.6060388585790277,
+  "Gap@O": 25.559984331244884,
+  "BestSingleAvg": 69.22667371688803,
+  "DatasetOracleAvg": 73.1500936981493,
+  "OracleAvg": 91.85509323563475,
+  "best_single_model": "Qwen3-8B",
+  "n_datasets": 15,
+  "n_test": 11481,
+  "method": "jev_direct_anonymous_train_profiles",
+  "jev_model": "jev-1.13.0",
+  "n_folds": 5,
+  "seed": 3407,
+  "n_candidates": 20,
+  "candidate_identity_exposed": false,
+  "profile_dimensions": [
+    "overall_mean_score",
+    "affective",
+    "code",
+    "knowledge",
+    "logic",
+    "math"
+  ],
+  "input_tokens_mean": 1938.7011584356762,
+  "input_tokens_p50": 1889.0,
+  "input_tokens_p95": 2251.0,
+  "input_tokens_total": 22258228.0,
+  "latency_ms_mean": 310.0831785316585,
+  "latency_ms_p50": 299.33636798523366,
+  "latency_ms_p95": 379.95751795824617
+}

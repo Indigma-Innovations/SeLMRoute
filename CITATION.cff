@@ -1,0 +1,8 @@
+cff-version: 1.2.0
+title: SeLMRoute
+message: "If you use SeLMRoute in academic work, please cite the software and the associated paper when available."
+type: software
+version: 1.0.0
+date-released: 2026-09-25
+license: Apache-2.0
+repository-code: https://github.com/Indigma-Innovations/SeLMRoute

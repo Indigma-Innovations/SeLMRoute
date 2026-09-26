@@ -1,0 +1,103 @@
+version: manual-v1
+model: jev-1.13.0
+questions:
+  task_family:
+    type: choice
+    instructions: Which primary capability is needed to solve `query` correctly?
+    criteria:
+      mathematics: Mathematical calculation, symbolic manipulation, or quantitative reasoning is primary.
+      code: Writing, modifying, debugging, or reasoning about executable code is primary.
+      logic: Formal, combinatorial, rule-based, or constraint-satisfaction reasoning is primary.
+      knowledge: Factual or specialized knowledge retrieval is primary.
+      social_affective: Emotion, intent, social context, interpersonal meaning, or affect is primary.
+      instruction_following: Satisfying detailed textual output or behavioral instructions is primary.
+      tool_use: Interaction with an external tool, software environment, API, or simulated environment is primary.
+      other: None of the listed capabilities is clearly primary.
+  math_reasoning:
+    type: noul
+    instructions: Does correctly solving `query` require mathematical calculation, symbolic manipulation, or quantitative reasoning beyond copying an explicitly stated value?
+  code_reasoning:
+    type: noul
+    instructions: Does correctly solving `query` require writing, modifying, debugging, or reasoning about executable computer code?
+  formal_logic:
+    type: noul
+    instructions: Does solving `query` materially require formal logical, combinatorial, rule-based, or constraint-satisfaction reasoning?
+  factual_recall:
+    type: noul
+    instructions: Can `query` be answered primarily through factual knowledge or retrieval, with little derivation or multi-step reasoning?
+  social_affective:
+    type: noul
+    instructions: Does correctness materially depend on interpreting emotion, intention, social context, interpersonal meaning, or conversational affect?
+  tool_interaction:
+    type: noul
+    instructions: Does completing `query` require interaction with an external tool, software environment, API, or simulated environment rather than only producing an answer?
+  external_knowledge:
+    type: noul
+    instructions: Does solving `query` require factual information that is not explicitly supplied in the query and cannot be derived from the supplied information alone?
+  current_information:
+    type: noul
+    instructions: Would correctness materially depend on recent, changing, or time-sensitive information?
+  domain_specialization:
+    type: score
+    instructions: How specialized is the knowledge required to solve `query` correctly?
+    criteria:
+      - Everyday or broadly accessible knowledge is sufficient.
+      - General educated or ordinary professional knowledge is required.
+      - Specialized disciplinary knowledge is required.
+      - Niche expert-level knowledge is required.
+  reasoning_depth:
+    type: score
+    instructions: How much sequential reasoning is required to reach a correct answer to `query`?
+    criteria:
+      - The answer is direct or can be identified immediately.
+      - One or two straightforward inference steps are needed.
+      - Several dependent reasoning steps are needed.
+      - Extended, deeply dependent reasoning is needed.
+  constraint_density:
+    type: score
+    instructions: How many independent requirements or constraints must simultaneously be satisfied by a correct answer to `query`?
+    criteria:
+      - Essentially one requirement determines correctness.
+      - A small number of compatible requirements must be satisfied.
+      - Several independent requirements must be tracked together.
+      - Many interacting constraints must simultaneously be satisfied.
+  context_integration:
+    type: score
+    instructions: How much information from different parts of `query` must be integrated to solve it correctly?
+    criteria:
+      - One local fact or instruction is sufficient.
+      - A few nearby facts or instructions must be combined.
+      - Multiple separated pieces of information must be integrated.
+      - Correctness depends on integrating many distributed details or relationships.
+  decomposition_need:
+    type: score
+    instructions: To what extent does solving `query` require decomposing it into distinct intermediate subproblems?
+    criteria:
+      - No meaningful decomposition is needed.
+      - A small decomposition may help but is not essential.
+      - Several distinct intermediate subproblems should be solved.
+      - A substantial hierarchical decomposition is required.
+  ambiguity:
+    type: score
+    instructions: How underspecified or semantically ambiguous is `query`?
+    criteria:
+      - The intended task and success condition are explicit.
+      - Minor interpretation choices exist but should not materially affect the answer.
+      - Important details are ambiguous or underspecified.
+      - Multiple materially different interpretations are plausible.
+  exactness:
+    type: score
+    instructions: How sensitive is correctness to exact details, precise constraints, exact values, or exact output behavior in `query`?
+    criteria:
+      - Approximate or broadly correct content is sufficient.
+      - Some details must be correct but small deviations are tolerable.
+      - Precise details or constraints materially affect correctness.
+      - Exact compliance or exact values are central to correctness.
+  answer_openness:
+    type: score
+    instructions: How broad is the set of answers that could reasonably count as correct for `query`?
+    criteria:
+      - There is essentially one correct answer or a very narrow equivalent set.
+      - A small family of closely related answers can be correct.
+      - Many substantively different answers could be acceptable.
+      - The task is highly open-ended with many valid solution directions.

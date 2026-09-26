@@ -1,0 +1,9 @@
+SeLMRoute
+Copyright 2026 SeLMRoute contributors
+
+This product can integrate with the TypeSafe AI / Jev API. TypeSafe and Jev are
+third-party products and are not distributed with SeLMRoute.
+
+SeLMRoute can consume LLMRouterBench result artifacts but does not redistribute
+LLMRouterBench or its underlying datasets. Users are responsible for reviewing
+and complying with the licenses and terms of benchmark data and model outputs.
