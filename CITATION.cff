@@ -1,8 +1,30 @@
 cff-version: 1.2.0
 title: SeLMRoute
-message: "If you use SeLMRoute in academic work, please cite the software and the associated paper when available."
+message: "If you use SeLMRoute in academic work, please cite the associated paper."
 type: software
+
+authors:
+  - family-names: Perifanis
+    given-names: Vasilis
+  - family-names: Pavlidis
+    given-names: Nikolaos
+  - family-names: Symeonidis
+    given-names: Symeon
+
 version: 1.0.0
 date-released: 2026-09-25
 license: Apache-2.0
 repository-code: https://github.com/Indigma-Innovations/SeLMRoute
+
+preferred-citation:
+  type: article
+  title: "SeLMRoute: Probabilistic Semantic Evidence for Large Language Model Routing"
+  authors:
+    - family-names: Perifanis
+      given-names: Vasilis
+    - family-names: Pavlidis
+      given-names: Nikolaos
+    - family-names: Symeonidis
+      given-names: Symeon
+  year: 2026
+  url: https://arxiv.org/abs/2609.34736

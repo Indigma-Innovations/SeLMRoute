@@ -4,6 +4,16 @@ SeLMRoute studies multi-LLM routing through an explicit probabilistic semantic s
 
 The default workflow is fully offline. **Paper reproduction makes no TypeSafe/JEV calls, downloads no Laya model, and requires no API key.** It uses the frozen semantic features and embeddings released with the paper.
 
+## Paper
+
+**SeLMRoute: Probabilistic Semantic Evidence for Large Language Model Routing**
+
+Vasilis Perifanis, Nikolaos Pavlidis, Symeon Symeonidis
+
+[arXiv:2609.34736](https://arxiv.org/abs/2609.34736)
+
+SeLMRoute is the reference implementation and reproducibility package for the paper. The repository includes the frozen semantic features, evaluation pipeline, ablations, deployment routers, and optional live semantic backends used to reproduce and extend the study.
+
 ## What is included
 
 - Duplicate-query-safe grouped train/test and grouped OOF evaluation.
@@ -274,6 +284,20 @@ GPT-5 is fixed as the reference model because it is the Best Single model in the
 Everything in Sections 3--5 is expected to run in a fresh environment with no external model or API access once the listed release artifacts are present.
 
 `03_live_routing.ipynb` and `selmroute live-route` are the only workflows that intentionally require an external semantic backend. They are demonstration/inference paths and are not required to reproduce the paper.
+
+## Citation
+
+If you use SeLMRoute in academic work, please cite the associated paper:
+
+```bibtex
+@article{perifanis2026selmroute,
+  title   = {SeLMRoute: Probabilistic Semantic Evidence for Large Language Model Routing},
+  author  = {Perifanis, Vasilis and Pavlidis, Nikolaos and Symeonidis, Symeon},
+  journal = {arXiv preprint arXiv:2609.34736},
+  year    = {2026},
+  url     = {https://arxiv.org/abs/2609.34736}
+}
+```
 
 ## License
 
