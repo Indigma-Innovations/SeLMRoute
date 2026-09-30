@@ -7,6 +7,7 @@ import pandas as pd
 
 from selmroute.features.embeddings import load_embeddings
 from selmroute.paper.ablation import build_semantic_ablation_features
+from selmroute.paths import benchmark_data_root
 from selmroute.routing.catboost_router import CatBoostQualityRouter
 
 PERF_SAMPLES = 11_481
@@ -30,19 +31,25 @@ def sha256_file(path: str | Path) -> str:
 
 
 def default_paths(root: str | Path = ".") -> dict[str, Path]:
+    """Resolve local benchmark rows.
+
+    Third-party benchmark rows are reconstructed under ``data`` by default.
+    The root can be overridden through SELMROUTE_BENCHMARK_DATA_ROOT.
+    """
     root = Path(root)
+    local = benchmark_data_root(root)
     return {
-        "perf_samples": root / "data/performance/samples.csv",
-        "perf_outcomes": root / "data/performance/outcomes.csv",
-        "jev_features": root / "data/performance/features_jev.csv",
-        "laya_features": root / "data/performance/features_laya.csv",
-        "gte_embeddings": root / "data/performance/gte_qwen2.npz",
-        "compact12_features": root / "data/performance/features_jev_compact12.csv",
-        "cost_samples": root / "data/cost/samples.csv",
-        "cost_outcomes": root / "data/cost/outcomes.csv",
-        "cost_features": root / "data/cost/features_jev.csv",
-        "jev_direct_predictions": root / "data/frozen/jev_direct/oof_predictions.csv",
-        "jev_direct_metrics": root / "data/frozen/jev_direct/jev_direct_oof_metrics.json",
+        "perf_samples": local / "performance/samples.csv",
+        "perf_outcomes": local / "performance/outcomes.csv",
+        "jev_features": local / "performance/features_jev.csv",
+        "laya_features": local / "performance/features_laya.csv",
+        "gte_embeddings": local / "performance/gte_qwen2.npz",
+        "compact12_features": local / "performance/features_jev_compact12.csv",
+        "cost_samples": local / "cost/samples.csv",
+        "cost_outcomes": local / "cost/outcomes.csv",
+        "cost_features": local / "cost/features_jev.csv",
+        "jev_direct_predictions": local / "frozen/jev_direct/oof_predictions.csv",
+        "jev_direct_metrics": local / "frozen/jev_direct/jev_direct_oof_metrics.json",
         "jev_model": root / "models/jev/model.cbm",
         "jev_model_meta": root / "models/jev/metadata.json",
         "laya_model": root / "models/laya/model.cbm",
@@ -52,7 +59,10 @@ def default_paths(root: str | Path = ".") -> dict[str, Path]:
 
 def _require(path: Path) -> None:
     if not path.exists():
-        raise FileNotFoundError(f"Required release artifact is missing: {path}")
+        raise FileNotFoundError(
+            f"Required artifact is missing: {path}\n"
+            "For samples/outcomes run `selmroute prepare-data`. "
+        )
 
 
 def _normalise_ids(*frames: pd.DataFrame) -> None:
@@ -161,6 +171,9 @@ def validate_release(root: str | Path = ".", *, require_models: bool = True) -> 
             }
 
     return {
+        "data_boundary": {
+            "benchmark_rows": str(benchmark_data_root(root)),
+        },
         "performance": {
             "samples": PERF_SAMPLES,
             "datasets": PERF_DATASETS,

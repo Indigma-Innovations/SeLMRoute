@@ -17,7 +17,7 @@ SeLMRoute is the reference implementation and reproducibility package for the pa
 ## What is included
 
 - Duplicate-query-safe grouped train/test and grouped OOF evaluation.
-- ProbabilityMass, Full, Hard, Primary, Primary+Entropy, and No-Entropy semantic ablations.
+- ProbabilityMass, Full, Hard, semantic ablations.
 - CatBoost, Random Forest, MLP, Ridge, and OLS performance-learner ablations.
 - Frozen GTE-Qwen2 embedding baseline.
     - You must download the `.npz` file from this [link](https://drive.google.com/file/d/1tLSgISiftPtt6qGkgNUfbmLkMjSBtcNm/view?usp=sharing) and put it under `/data/performance/`
@@ -33,6 +33,40 @@ SeLMRoute is the reference implementation and reproducibility package for the pa
   1. paper reproduction,
   2. offline use of a released router on published semantic features,
   3. optional live routing of a new query through Laya or JEV.
+
+For the reproduction you should obtain the [LLMRouterBench](https://github.com/ynulihao/LLMRouterBench/tree/main) data, e.g., from the Hugging Face [repo](https://huggingface.co/datasets/NPULH/LLMRouterBench/tree/main).
+
+The frozen SeLMRoute experiments used:
+
+```text
+Hugging Face dataset repository: NPULH/LLMRouterBench
+revision: 0e5af1b84bf73437a01a1849c0f1d2468baa93fc
+bundle: bench-release.tar.gz
+SHA-256: b79f8cde1a6f029c2efa663a3a3b6f7748defb22341fe59f328cebef6648c8f1
+```
+
+Keeping the exact revision is important because the SeLMRoute feature files are keyed by deterministic sample IDs generated from this frozen result bundle.
+
+If you already have the extracted bundle, its directory should look like:
+
+```text
+/path/to/bench-release/
+├── aime/
+├── bbh/
+├── emorynlp/
+├── finqa/
+├── gpqa/
+├── ...
+└── mmlupro/
+```
+
+To reconstruct the necessary `samples.csv` and `outcomes.csv` files:
+```bash
+uv run selmroute prepare-data \
+  --bundle /path/to/bench-release.tar.gz
+```
+
+The SHA-256 is verified automatically.
 
 ## 1. Environment
 

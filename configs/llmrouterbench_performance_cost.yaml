@@ -1,0 +1,26 @@
+# Official LLMRouterBench performance-cost pool (baseline_config_performance_cost.yaml, 2026-09-19).
+datasets:
+  - aime
+  - livemathbench
+  - gpqa
+  - hle
+  - livecodebench
+  - mmlupro
+  - swe-bench
+  - simpleqa
+  - tau2
+  - arenahard
+models:
+  - claude-sonnet-4
+  - deepseek-v3-0324
+  - deepseek-v3.1-terminus
+  - deepseek-r1-0528
+  - gemini-2.5-flash
+  - gemini-2.5-pro
+  - gpt-5-chat
+  - gpt-5
+  - qwen3-235b-a22b-2507
+  - qwen3-235b-a22b-thinking-2507
+  - glm-4.6
+  - kimi-k2-0905
+  - intern-s1

@@ -4,13 +4,43 @@ import pandas as pd
 import typer
 from rich.console import Console
 
+from selmroute.data.prepare import prepare_benchmark_data
 from selmroute.inference import route_published_sample
 from selmroute.live import route_live
+from selmroute.paths import benchmark_data_root
 from selmroute.reproduce import reproduce_all
 from selmroute.validation import write_manifest
 
 app = typer.Typer(add_completion=False, no_args_is_help=True, help="SeLMRoute public reproduction and inference CLI")
 console = Console()
+
+
+@app.command("prepare-data")
+def prepare_data_cmd(
+    root: Path = typer.Option(Path("."), exists=True, file_okay=False, help="SeLMRoute repository root."),
+    results_root: Path | None = typer.Option(None, exists=True, file_okay=False, help="Extracted LLMRouterBench bench-release directory."),
+    bundle: Path | None = typer.Option(None, exists=True, dir_okay=False, help="Pinned LLMRouterBench bench-release.tar.gz."),
+    output_root: Path | None = typer.Option(None, help="Local output root. Defaults to ./data."),
+    verify_bundle: bool = typer.Option(True, "--verify-bundle/--no-verify-bundle", help="Verify the frozen bundle SHA-256."),
+    keep_extracted_source: bool = typer.Option(False, help="Keep bundle extraction under OUTPUT_ROOT/_source."),
+):
+    """Rebuild samples.csv/outcomes.csv locally from LLMRouterBench.
+
+    Exactly one of --bundle or --results-root is required. Benchmark rows are
+    never downloaded by SeLMRoute and are written only to the gitignored local
+    data root.
+    """
+    if (results_root is None) == (bundle is None):
+        raise typer.BadParameter("Provide exactly one of --bundle or --results-root")
+    target = output_root or benchmark_data_root(root)
+    result = prepare_benchmark_data(
+        output_root=target,
+        results_root=results_root,
+        bundle=bundle,
+        verify_bundle=verify_bundle,
+        keep_extracted_source=keep_extracted_source,
+    )
+    console.print_json(data=result)
 
 
 @app.command("validate")

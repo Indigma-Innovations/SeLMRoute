@@ -9,3 +9,10 @@ artifacts/
 .ipynb_checkpoints/
 
 data/performance/gte_qwen2.npz
+data/cost/samples*.csv
+data/cost/outcomes*.csv
+data/performance/samples*.csv
+data/performance/outcomes*.csv
+data/cost/official_count_audit.csv
+data/manifest.json
+*tar.gz
