@@ -18,7 +18,19 @@ or:
 uv run selmroute prepare-data --results-root /path/to/bench-release
 ```
 
-The generated `.local_data/**/samples.csv` and `.local_data/**/outcomes.csv` remain local and are gitignored.
+By default, `prepare-data` writes the reconstructed benchmark rows under `./data`. The resulting layout is:
+
+```text
+data/
+├── performance/
+│   ├── samples.csv
+│   └── outcomes.csv
+└── cost/
+    ├── samples.csv
+    └── outcomes.csv
+```
+
+These reconstructed row files remain local and are gitignored. The output  location can be changed explicitly with `--output-root`, or globally with the `SELMROUTE_BENCHMARK_DATA_ROOT` environment variable. Relative values of that environment variable are resolved from the repository root supplied to the  command. SeLMRoute does not download the benchmark content.
 
 The frozen benchmark provenance used for the paper is:
 
@@ -35,10 +47,16 @@ The performance-cost experiment uses AIME, LiveMathBench, GPQA, HLE, LiveCodeBen
 
 These datasets have independent licenses, access conditions, and/or source-content rights. Users are responsible for complying with the terms that apply to the data they obtain. The existence of an open-source license on SeLMRoute or on benchmark tooling does not relicense third-party dataset content.
 
-## SeLMRoute-derived artifacts
+## Files distributed by SeLMRoute
 
 SeLMRoute may publish numerical artifacts produced by the research pipeline, including semantic feature matrices, embeddings, aggregate metrics, frozen routing predictions, and trained router parameters, provided the published versions contain no original benchmark question/answer/prompt text or raw model completions.
 
-The intended public locations are `release_assets/` and `models/`. `RELEASE_ASSETS.md` lists the accepted files and migration procedure.
+Released data artifacts live alongside the locally reconstructed rows under `data/`:
+- `data/performance/` contains the JEV and Laya semantic feature matrices and the compact JEV feature matrix. The optional GTE-Qwen2 embedding artifact is also expected in this directory as `gte_qwen2.npz`.
+- `data/cost/` contains the JEV semantic feature matrix for the performance-cost experiment.
+- `data/frozen/jev_direct/` contains frozen JEV-Direct OOF predictions and their aggregate metrics.
+
+Trained CatBoost router parameters and metadata are distributed separately in `models/jev/` and `models/laya/`. Generated validation and reproduction outputs are written under `artifacts/` and are gitignored.
+
 
 This file documents the project's technical distribution boundary. It is not a substitute for legal advice concerning a particular third-party dataset or model provider.
